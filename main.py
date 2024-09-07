@@ -13,5 +13,6 @@ while True:
     days = time_elapsed.days
     hours, remainder = divmod(time_elapsed.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
+    print("\033[H\033[2J", end="")
     print(f"Days: {days}; Hours: {hours}; Minutes: {minutes}; Seconds: {seconds}\r", end="")
     time.sleep(1)
