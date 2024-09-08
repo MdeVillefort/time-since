@@ -9,3 +9,6 @@ def run():
         print("\033[H\033[2J", end="")
         print(delta, end="")
         time.sleep(1)
+
+if __name__ == "__main__":
+    run()
