@@ -10,6 +10,9 @@ class Delta:
     hours: int
     minutes: int
     seconds: int
+    
+    def __str__(self):
+        return f"Days: {self.days}; Hours: {self.hours:02}; Minutes: {self.minutes:02}; Seconds: {self.seconds:02}"
 
 def read_time(datetime_file: str = os.path.join(HERE, "datetime.txt")) -> datetime.datetime:
     """Reads iso-formatted time string from file"""
