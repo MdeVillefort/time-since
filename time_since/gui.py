@@ -28,11 +28,12 @@ class ApplicationTrayIcon(QSystemTrayIcon):
       self.setIcon(icon)
       self.setVisible(True)
       menu = QMenu()
-      menu.addAction(QAction("TEST1"))
-      menu.addAction(QAction("TEST2"))
-      quit = QAction("Quit")
-      quit.triggered.connect(app.quit)
-      menu.addAction(quit)
+      # Have to create a reference to any QActions attached to the QMenu here.
+      # If not, the context menu returned by contextMenu() for some reason does
+      # not keep references to them, and presumably they are garbage-collected.
+      self.quitAction = QAction("Quit")
+      self.quitAction.triggered.connect(app.quit)
+      menu.addAction(self.quitAction)
       self.activated.connect(self.onActivated)
       self.setContextMenu(menu)
    
@@ -40,7 +41,7 @@ class ApplicationTrayIcon(QSystemTrayIcon):
       if reason == self.ActivationReason.Trigger:
          self.widget.show()
       elif reason == self.ActivationReason.Context:
-         self.contextMenu().popup(QCursor.pos()) # This does not work!? WHY!!??
+         self.contextMenu().popup(QCursor.pos())
 
 def run():
    app = QApplication([]) 
