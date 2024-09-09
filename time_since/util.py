@@ -1,6 +1,5 @@
 import os
 import datetime
-import threading
 from dataclasses import dataclass
 
 from time_since import HERE
@@ -14,13 +13,6 @@ class Delta:
     
     def __str__(self):
         return f"Days: {self.days}; Hours: {self.hours:02}; Minutes: {self.minutes:02}; Seconds: {self.seconds:02}"
-
-class DeltaLoop(threading.Thread):
-    """Thread which creates the loop that calculates the delta"""
-    def __init__(self, start: datetime.datetime, frequency: int = 1):
-        pass
-    def run(self):
-        pass
 
 def read_time(datetime_file: str = os.path.join(HERE, "datetime.txt")) -> datetime.datetime:
     """Reads iso-formatted time string from file"""
